@@ -23,21 +23,13 @@ class PlanCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             child: Stack(
               children: [
-                const Positioned.fill(child: ColoredBox(color: Color(0xff111827))),
                 Positioned(
-                  right: 0,
+                  right: -40,
                   top: 0,
-                  bottom: 0,
-                  width: 115,
+                  width: 330,
                   child: Image.asset(imagePath, fit: BoxFit.cover),
                 ),
-                Positioned.fill(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [Colors.black.withValues(alpha: .15), Colors.transparent]),
-                    ),
-                  ),
-                ),
+
                 Padding(
                   padding: const EdgeInsets.fromLTRB(19, 20, 15, 17),
                   child: Column(

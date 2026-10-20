@@ -196,7 +196,7 @@ class _WorkoutProgramList extends StatelessWidget {
             SizedBox(width: 14),
             ProgramCard(
               title: 'Arm\nStrengthening',
-              imagePath: 'assets/images/arm_strength.jpg',
+              imagePath: 'assets/images/arm-strength.jpg',
               pro: true,
             ),
           ],

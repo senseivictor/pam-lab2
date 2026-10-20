@@ -94,7 +94,7 @@ class _GymHero extends StatelessWidget {
           children: [
             Positioned.fill(
               child: Image.asset(
-                'assets/images/hero.png',
+                'assets/images/hero.jpg',
                 fit: BoxFit.cover,
               ),
             ),
