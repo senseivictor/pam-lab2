@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'data/fitness_repository.dart';
 import 'screens/home_screen.dart';
+import 'state/fitness_cubit.dart';
 import 'theme/app_colors.dart';
 
 class FitnessApp extends StatelessWidget {
@@ -16,7 +20,13 @@ class FitnessApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.green),
         fontFamily: 'Arial',
       ),
-      home: const HomeScreen(),
+      home: RepositoryProvider(
+        create: (_) => FitnessRepository(),
+        child: BlocProvider(
+          create: (context) => FitnessCubit(context.read<FitnessRepository>()),
+          child: const HomeScreen(),
+        ),
+      ),
     );
   }
 }

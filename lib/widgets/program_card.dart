@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../theme/app_colors.dart';
 
 class ProgramCard extends StatelessWidget {
@@ -7,50 +8,83 @@ class ProgramCard extends StatelessWidget {
     required this.title,
     required this.imagePath,
     this.pro = false,
+    this.calories = 210,
+    this.durationMinutes = 120,
+    this.isFavorite = false,
+    this.onFavorite,
+    this.onTap,
   });
 
   final String title;
   final String imagePath;
   final bool pro;
+  final int calories;
+  final int durationMinutes;
+  final bool isFavorite;
+  final VoidCallback? onFavorite;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) => SizedBox(
-        width: 146,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: Stack(
-            children: [
-              Positioned.fill(child: Image.asset(imagePath, fit: BoxFit.cover)),
-              const Positioned.fill(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Color(0x22000000), Color(0xdd000000)],
-                    ),
+    width: 146,
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: InkWell(
+        onTap: onTap,
+        onLongPress: onFavorite,
+        child: Stack(
+          children: [
+            Positioned.fill(child: Image.asset(imagePath, fit: BoxFit.cover)),
+            const Positioned.fill(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Color(0x22000000), Color(0xdd000000)],
                   ),
                 ),
               ),
-              if (pro)
-                const Positioned(right: 7, top: 8, child: _ProPill()),
+            ),
+            if (pro) const Positioned(right: 7, top: 8, child: _ProPill()),
+          if (isFavorite)
               Positioned(
-                left: 12,
-                right: 8,
-                bottom: 12,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(title, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700)),
-                    const SizedBox(height: 7),
-                    const Text('210 kcal  -  120 min', style: TextStyle(color: Colors.white, fontSize: 10)),
-                  ],
+                right: 6,
+                top: 6,
+              child: const Icon(
+                Icons.favorite,
+                color: Colors.red,
+                size: 19,
                 ),
               ),
-            ],
-          ),
+            Positioned(
+              left: 12,
+              right: 8,
+              bottom: 12,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 7),
+                  Text(
+                    '$calories kcal  -  $durationMinutes min',
+                    style: TextStyle(color: Colors.white, fontSize: 10),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-      );
+      ),
+    ),
+  );
 }
 
 class _ProPill extends StatelessWidget {
@@ -58,8 +92,18 @@ class _ProPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
-        child: const Text('Pro', style: TextStyle(color: AppColors.green, fontWeight: FontWeight.w700, fontSize: 10)),
-      );
+    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(8),
+    ),
+    child: const Text(
+      'Pro',
+      style: TextStyle(
+        color: AppColors.green,
+        fontWeight: FontWeight.w700,
+        fontSize: 10,
+      ),
+    ),
+  );
 }

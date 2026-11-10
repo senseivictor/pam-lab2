@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../theme/app_colors.dart';
 
 class SectionHeader extends StatelessWidget {
@@ -9,16 +10,22 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(right: 22),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(title, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 18)),
-            TextButton(
-              onPressed: onSeeAll,
-              child: const Text('See All', style: TextStyle(color: AppColors.green)),
-            ),
-          ],
+    padding: const EdgeInsets.only(right: 22),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
         ),
-      );
+        TextButton(
+          onPressed: onSeeAll,
+          child: const Text(
+            'See All',
+            style: TextStyle(color: AppColors.green),
+          ),
+        ),
+      ],
+    ),
+  );
 }
